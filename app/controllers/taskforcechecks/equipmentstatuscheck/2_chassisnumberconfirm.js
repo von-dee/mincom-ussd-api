@@ -1,31 +1,37 @@
 
 exports.main = (req, res) => {
 
-    const request = require("../../utils/axios.js");
+    const request = require("../../../utils/axios.js");
   
-    async function apiCalls() {
+    async function apiCalls(ussdinput) {
         const actions = [
           {
+            id: 'chassisnumber',
             title: 'Chassis Number',
             config: {
               method: 'get',
-              url: 'http://directus.asgmgh.com/items/tb_ussd_menu?filter={"MENU_CODE":{"_eq":"MENU000001" }}',
+              url: 'http://directus.asgmgh.com/items/tb_tracker_lookup?filter={ "TLOOK_EXCAVATOR": { "_eq": "'+
+              ussdinput+'" }}',
               headers: { 'Authorization': 'Bearer c97WMFxvp17HdRFEOkf0ZII54QZudoQf' }
             }
           },
           {
+            id: 'excavator',
             title: 'Excavator',
             config: {
               method: 'get',
-              url: 'http://directus.asgmgh.com/items/tb_excavators?filter={ "EXCAVATOR_ID": { "_eq": "25" }}',
+              url: 'http://directus.asgmgh.com/items/tb_excavators?filter={ "EXCAVATOR_CHASISNUMBER": { "_eq": "'+
+              ussdinput+'" }}',
               headers: { 'Authorization': 'Bearer c97WMFxvp17HdRFEOkf0ZII54QZudoQf' }
             }
           },
           {
+            id: 'response',
             title: 'Response',
+            responsekey: 'CHECK_RESPONSE',
             config: {
               method: 'get',
-              url: 'http://directus.asgmgh.com/items/tb_ussd_equipment_reconnection?filter={ "EQUIPREC_CODE": { "_eq": "EQUI0000001" }}&fields=EQUIPREC_RESPONSE',
+              url: 'http://directus.asgmgh.com/items/tb_ussd_taskforceschecks?filter={ "CHECK_CODE": { "_eq": "CHECK000002" }}',
               headers: { 'Authorization': 'Bearer c97WMFxvp17HdRFEOkf0ZII54QZudoQf' }
             }
           }
@@ -34,6 +40,6 @@ exports.main = (req, res) => {
         res.send(result);
     }; 
   
-    apiCalls();
+    apiCalls(req.body.ussdinput);
         
   };

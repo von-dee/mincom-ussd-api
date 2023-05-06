@@ -2,15 +2,16 @@
 exports.main = (req, res) => {
 
     const request = require("../../utils/axios.js");
-
+  
     async function apiCalls() {
         const actions = [
           {
+            id: 'response',
             title: 'Response',
-            responsekey: 'EQUIPREC_RESPONSE',
+            responsekey: 'REREG_RESPONSE',
             config: {
               method: 'get',
-              url: 'http://directus.asgmgh.com/items/tb_ussd_equipment_reconnection?filter={ "EQUIPREC_CODE": { "_eq": "EQUI0000001" }}&fields=EQUIPREC_RESPONSE',
+              url: 'http://directus.asgmgh.com/items/tb_ussd_equipment_reregistration?filter={ "REREG_CODE": { "_eq": "RREG0000001" }}&fields=REREG_RESPONSE',
               headers: { 'Authorization': 'Bearer c97WMFxvp17HdRFEOkf0ZII54QZudoQf' }
             }
           }

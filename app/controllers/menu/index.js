@@ -9,7 +9,7 @@ exports.main = (req, res) => {
               title: 'Chassis Number',
               config: {
                 method: 'get',
-                url: 'http://directus.asgmgh.com/items/tb_ussd_menu?filter={"MENU_CODE":{"_eq":"MENU000001" }}',
+                url: 'http://directus.asgmgh.com/items/tb_ussd_menu?filter={"MENU_CODE":{"_eq":"MENU000001" }}&fields=MENU_RESPONSE',
                 headers: { 'Authorization': 'Bearer c97WMFxvp17HdRFEOkf0ZII54QZudoQf' }
               }
             }

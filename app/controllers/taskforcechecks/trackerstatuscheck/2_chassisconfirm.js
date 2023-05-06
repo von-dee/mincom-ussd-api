@@ -1,10 +1,9 @@
 
 exports.main = (req, res) => {
 
-    const request = require("../../utils/axios.js");
-    
+    const request = require("../../../utils/axios.js");
+  
     async function apiCalls(ussdinput) {
-
         const actions = [
           {
             id: 'chassisnumber',
@@ -26,29 +25,19 @@ exports.main = (req, res) => {
               headers: { 'Authorization': 'Bearer c97WMFxvp17HdRFEOkf0ZII54QZudoQf' }
             }
           },
-          {
+          {            
             id: 'response',
             title: 'Response',
-            responsekey: 'EQUIPREC_RESPONSE',
-            placeholders:{
-              pre_query: {
-              },
-              post_query: {
-                chassisnumber: {
-                  queryid: 'excavator',
-                  column: 'EXCAVATOR_CHASISNUMBER',
-                },
-              }
-            },
+            responsekey: 'CHECK_RESPONSE',
             config: {
               method: 'get',
-              url: 'http://directus.asgmgh.com/items/tb_ussd_equipment_reconnection?filter={ "EQUIPREC_CODE": { "_eq": "EQUI0000002" }}&fields=EQUIPREC_RESPONSE',
+              url: 'http://directus.asgmgh.com/items/tb_ussd_taskforceschecks?filter={ "CHECK_CODE": { "_eq": "CHECK000008" }}',
               headers: { 'Authorization': 'Bearer c97WMFxvp17HdRFEOkf0ZII54QZudoQf' }
             }
           }
         ]
         const result = await request.main(req, res, actions);
-        res.send(result); 
+        res.send(result);
     }; 
   
     apiCalls(req.body.ussdinput);
